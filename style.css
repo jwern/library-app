@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;1,400&display=swap');
+
+html, body {
+  font-family: 'Asap', sans-serif;
+  font-size: 20px;
+}
+
+#library-set {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 60px;
+}
+
+.book-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 2px solid tan;
+  background-color: beige;
+  border-radius: 5px;
+  height: 250px;
+  margin: 10px;
+  font-size: 1rem;
+}
+
+.book-info p {
+  padding: 2px 0;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+.delete-button {
+  background-color: lightblue;
+  margin-top: 32px;
+}
+
+.hidden {
+  display: none;
+}
+/* Media Queries */
+
+@media only screen and (max-width: 1024px) {
+  #library-set {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (max-width: 768px) {
+  #library-set {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (max-width: 500px) {
+  #library-set {
+    grid-template-columns: 1fr;
+  }
+}
