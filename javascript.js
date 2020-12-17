@@ -1,14 +1,14 @@
 // Book Constructor
-function Book([title, author, pages, haveRead]) {
+function Book([title, author, pages, read]) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.haveRead = readStatus(haveRead);
+  this.read = readStatus(read);
   this.bookID = bookID++;
 }
 
 Book.prototype.toggleRead = function() {
-  this.haveRead = readStatus(!this.haveRead);
+  this.read = readStatus(!this.read);
 }
 
 function toggleReadStatus(book) {
@@ -16,7 +16,9 @@ function toggleReadStatus(book) {
   let bookObject = myLibrary.find(obj => obj.bookID == findBookID(bookDiv));
   
   bookObject.toggleRead(); // Update the Book object with new read status
-  bookDiv.querySelector('.read-status').innerHTML = bookObject.haveRead; // Update the DOM with new read status
+  // bookDiv.querySelector('.read').innerHTML = bookObject.read; // Update the DOM with new read status
+  bookDiv.querySelector('.read').classList.toggle('have-read-icon');
+  bookDiv.querySelector('.read').classList.toggle('have-not-read-icon');
 }
 
 function findBookDiv(button) {
@@ -36,6 +38,10 @@ function readStatus(read) {
   return (read ? "Have read" : "");
 }
 
+function setReadStatusClass(read) {
+  return (read ? "have-read-icon" : "have-not-read-icon");
+}
+
 // Add book to display after it's been added to library
 function displayNewBook(book) {
   let libraryBlock = document.getElementById('library-set');
@@ -48,10 +54,19 @@ function displayNewBook(book) {
   for (info in book) {
     if (info !== 'bookID' && info !== 'toggleRead') {
       let infoPara = document.createElement('p');
-      if (info === 'haveRead') {
-        infoPara.classList.add('read-status');
-      }
-      infoPara.append(book[info]);
+      infoPara.classList.add(`${info}`);
+      let heading = document.createElement('span');
+      heading.append(`${info}:`)
+      heading.classList.add(`heading-${info}`);
+      if (info === 'read') {
+        infoPara.classList.add(setReadStatusClass(book[info]));
+        infoPara.addEventListener('click', function(e) {
+          toggleReadStatus(e.target);
+        });
+      } else {
+        infoPara.append(book[info]);
+      };
+      bookDiv.append(heading);
       bookDiv.append(infoPara);
     }
   }
@@ -64,11 +79,11 @@ function displayNewBook(book) {
   });
 
   // Create a toggle read button for the book
-  let toggleButton = createButton("toggle", "Change Read Status");
-  bookDiv.append(toggleButton);
-  toggleButton.addEventListener('click', function(e) {
-    toggleReadStatus(e.target);
-  });
+  // let toggleButton = createButton("toggle", "Change Read Status");
+  // bookDiv.append(toggleButton);
+  // toggleButton.addEventListener('click', function(e) {
+  //   toggleReadStatus(e.target);
+  // });
 
   // Add the container to the library
   libraryBlock.append(bookDiv);
@@ -99,9 +114,9 @@ function formatBookInput(input) {
   let title = input['book-title'];
   let author = input['book-author'];
   let pages = input['book-pages'];
-  let haveRead = input['book-have-read'];
+  let read = input['book-have-read'];
 
-  return [title, author, pages, haveRead];
+  return [title, author, pages, read];
 }
 
 // Create a new book from form input, and add to library array and DOM

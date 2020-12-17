@@ -31,4 +31,4 @@ TBA
 
 ## Technologies ##
 
-TBA
+This Library App was built with HTML, CSS, and JavaScript.  The layout is CSS Grid.  The font is... TBA

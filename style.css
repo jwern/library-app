@@ -1,10 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap');
 
 html, body {
-  font-family: 'Asap', sans-serif;
+  /* font-family: 'Asap', sans-serif; */
+  font-family: 'Cutive Mono', monospace;
   font-size: 20px;
 }
 
+p {
+  margin: 0;
+}
+
+#add-book-form {
+  position: absolute;
+  padding: 60px;
+  height: 75vh;
+  border: 2px solid #401600;
+  border-radius: 5px;
+  left: 0;
+  color: #ebe2be;
+  font-weight: 900;
+  transition: left 0.5s ease-in;
+  background-color: #501b00 ;
+  background-image: url(images/large-leather.png);
+}
+
+#add-book-form.hidden {
+  left: -200px;
+}
 #library-set {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -12,52 +35,92 @@ html, body {
 }
 
 .book-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: repeat(5, 1fr);
   text-align: center;
-  border: 2px solid tan;
-  background-color: beige;
+  border: 2px solid #eadbb0;
+  background-color: #ebe2be;
   border-radius: 5px;
-  height: 250px;
+  height: 350px;
+  min-width: 210px;
   margin: 10px;
   font-size: 1rem;
 }
 
-.book-info p {
+/* .book-info p {
   padding: 2px 0;
+} */
+
+.book-info span {
+  border-right: 4px double black;
 }
 
-p {
-  margin: 0;
+.book-info .title {
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+
+.book-info .author {
+  border-bottom: 4px double black;
+  width: 100%;
 }
 
 button {
   cursor: pointer;
 }
+/* 
+.book-info p.have-not-read-icon, .book-info p.have-read-icon {
+  /* padding-bottom: 90px; */
+  /* margin-top: -20px;
+  cursor: pointer;
+} */
+
+.read {
+  margin-top: -20px;
+  cursor: pointer;
+}
+
+.read:hover {
+  
+}
+
+.have-not-read-icon {
+  background: url(images/label.png) no-repeat 50% 50%;
+  background-size: auto 75px;
+}
+
+.have-read-icon {
+  background: url(images/check.png) no-repeat 50% 50%;
+  background-size: auto 75px;
+}
 
 .delete-button {
+  grid-column: 1/3;
+  grid-row: 5;
   background-color: lightblue;
   margin-top: 32px;
 }
 
-.hidden {
-  display: none;
+.attribution {
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
+
 /* Media Queries */
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1200px) {
   #library-set {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   #library-set {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 768px) {
   #library-set {
     grid-template-columns: 1fr;
   }
