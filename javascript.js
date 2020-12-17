@@ -15,8 +15,8 @@ function toggleReadStatus(book) {
   let bookDiv = findBookDiv(book);
   let bookObject = myLibrary.find(obj => obj.bookID == findBookID(bookDiv));
   
-  bookObject.toggleRead();
-  bookDiv.querySelector('.read-status').innerHTML = bookObject.haveRead;
+  bookObject.toggleRead(); // Update the Book object with new read status
+  bookDiv.querySelector('.read-status').innerHTML = bookObject.haveRead; // Update the DOM with new read status
 }
 
 function findBookDiv(button) {
