@@ -28,6 +28,36 @@ p {
 #add-book-form.hidden {
   left: -200px;
 }
+
+#add-book-button {
+  font-family: inherit;
+  font-size: 1rem;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: #FFFF99;
+  border: none;
+  margin-left: 2px;
+  padding: 16px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+#form-submit {
+  font-family: inherit;
+  font-size: 1rem;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#form-submit:hover {
+  color: #FFFF99;
+  font-weight: 900;
+}
+
 #library-set {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -39,12 +69,14 @@ p {
   grid-template-columns: 1fr 3fr;
   grid-template-rows: repeat(5, 1fr);
   text-align: center;
-  border: 2px solid #eadbb0;
-  background-color: #ebe2be;
-  border-radius: 5px;
+  /* border: 2px solid #eadbb0; */
+  background: rgb(235,226,190);
+  background: linear-gradient(180deg, rgba(235,226,190,1) 40%, rgba(236,231,210,1) 75%);
+  border-radius: 10px;
   height: 350px;
   min-width: 210px;
   margin: 10px;
+  padding: 20px 10px;
   font-size: 1rem;
 }
 
@@ -59,6 +91,7 @@ p {
 .book-info .title {
   border-bottom: 1px solid black;
   width: 100%;
+  font-weight: 900;
 }
 
 .book-info .author {
@@ -81,12 +114,13 @@ button {
   cursor: pointer;
 }
 
-.read:hover {
-  
-}
-
 .have-not-read-icon {
   background: url(images/label.png) no-repeat 50% 50%;
+  background-size: auto 75px;
+}
+
+.have-not-read-icon:hover {
+  background: url(images/label-red.png) no-repeat 50% 50%;
   background-size: auto 75px;
 }
 
@@ -95,17 +129,19 @@ button {
   background-size: auto 75px;
 }
 
+.have-read-icon:hover {
+  background: url(images/check-green.png) no-repeat 50% 50%;
+  background-size: auto 75px;
+}
+
 .delete-button {
   grid-column: 1/3;
   grid-row: 5;
-  background-color: lightblue;
+  background-color: transparent;
   margin-top: 32px;
-}
-
-.attribution {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
 }
 
 /* Media Queries */

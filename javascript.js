@@ -72,7 +72,7 @@ function displayNewBook(book) {
   }
 
   // Create a delete button for the book
-  let deleteButton = createButton("delete", "Delete Book");
+  let deleteButton = createButton("delete", "Remove Book");
   bookDiv.append(deleteButton);
   deleteButton.addEventListener('click', function(e) {
     deleteBook(e.target);
