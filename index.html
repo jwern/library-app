@@ -6,26 +6,23 @@
     <link href="./style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-  <div id="add-book-section">
-      <form id="add-book-form" class="hidden">
-        <button type="button" id="add-book-button">Add Book</button>
+  <div id="add-book-section" class="hidden">
+    <button id="add-book-button">Add Book</button>
+      <form id="add-book-form" >
         <label for="book-title">Title</label><br/>
         <input type="text" id="book-title" name="book-title"><br/>
         <label for="book-author">Author</label><br/>
         <input type="text" id="book-author" name="book-author"><br/>
         <label for="book-pages">Pages</label><br/>
         <input type="number" id="book-pages" name="book-pages"><br/>
-        <!-- <label for="book-have-read">Have Read?</label><br/> -->
         <input type="checkbox" id="yes-read" name="book-have-read" value="Have read">
         <label for="yes-read">Have Read?</label><br>
-        <!-- <input type="radio" id="not-read" name="book-have-read" value="no">
-        <label for="not-read">No</label><br> -->
         <input type="submit" id="form-submit" value="Add Book">
-        <div class="attribution">
-          Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> 
-          from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-        </div>
       </form>
+      <div class="attribution">
+        Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> 
+        from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+      </div>
   </div>
   <div id="library-set">
   </div>

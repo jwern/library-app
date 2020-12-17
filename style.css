@@ -9,31 +9,37 @@
 }
 
 html, body {
-  /* font-family: 'Asap', sans-serif; */
   font-family: 'Cutive Mono', monospace;
   font-size: 20px;
+  margin: 0;
 }
 
 p {
   margin: 0;
 }
 
-#add-book-form {
-  position: absolute;
-  padding: 60px;
+#add-book-section {
+  width: 300px;
   height: 75vh;
+  position: absolute;
+  left: 0;
+  top: 0;
   border: 2px solid var(--leather-border);
   border-radius: 5px;
-  left: 0;
   color: var(--book-form-text);
-  font-weight: 900;
   transition: transform 0.5s ease-in;
   background-color: var(--leather-brown);
   background-image: url(images/large-leather.png);
 }
 
-#add-book-form.hidden {
-  /* left: -200px; */
+#add-book-form {
+  position: absolute;
+  padding: 60px;
+  left: 0;
+  font-weight: 900;
+}
+
+#add-book-section.hidden {
   transform: translateX(-95%);
 }
 

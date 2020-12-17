@@ -98,7 +98,7 @@ function createButton(type, text) {
 
 // Toggle the add book form visiblity when hitting the button
 function revealForm() {
-  let addBookform = document.getElementById('add-book-form');
+  let addBookform = document.getElementById('add-book-section');
   addBookform.classList.toggle('hidden');
 
   if (addBookform.classList.contains('hidden')) {
