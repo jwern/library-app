@@ -14,11 +14,11 @@ html, body {
 }
 
 body {
-  border: 60px solid var(--leather-border);
   padding: 20px;
-  border-image: url(images/purty-wood.png) 80 round;
   background-color: var(--leather-border);
   background-image: url(images/dark-wood.png);
+  border: 60px solid var(--leather-brown);
+  border-image: url(images/purty-wood.png) 80 round;
   min-height: 100vh;
   box-sizing: border-box;
 }
@@ -214,6 +214,9 @@ button {
   }
 }
 @media only screen and (max-width: 650px) {
+  body {
+    border-width: 40px;
+  }
   #library-set {
     grid-template-columns: 1fr;
   }
