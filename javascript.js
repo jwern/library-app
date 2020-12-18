@@ -109,15 +109,26 @@ function revealForm() {
 }
 
 function sortBooks() {
-  myLibrary = myLibrary.sort(function(a, b) {
+  let preSortedLibrary = myLibrary.slice();
+  myLibrary.sort(function(a, b) {
     let aName = a.title.replace(/^The |^A |^An /i, "");
     let bName = b.title.replace(/^The |^A |^An /i, "");
     return aName.localeCompare(bName);
   });
-  
+ 
+  let arrayChanged = preSortedLibrary.find(obj => obj !== myLibrary[preSortedLibrary.indexOf(obj)]);
+
+  if (arrayChanged) {
+    refreshBookDisplay();
+  };
+}
+
+function refreshBookDisplay() {
   let libraryContainer = document.getElementById('library-set');
 
-  libraryContainer.innerHTML = '';
+  while (libraryContainer.lastChild) {
+    libraryContainer.removeChild(libraryContainer.lastChild);
+  }
   initializeBookDisplay();
 }
 
