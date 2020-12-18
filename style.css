@@ -13,6 +13,16 @@ html, body {
   margin: 0;
 }
 
+body {
+  border: 60px solid var(--leather-border);
+  padding: 20px;
+  border-image: url(images/purty-wood.png) 80 round;
+  background-color: var(--leather-border);
+  background-image: url(images/dark-wood.png);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
 p {
   margin: 0;
 }
@@ -20,6 +30,7 @@ p {
 #add-book-section {
   width: 300px;
   height: 75vh;
+  min-height: 350px;
   position: absolute;
   left: 0;
   top: 0;
@@ -42,18 +53,24 @@ p {
   transform: translateX(-95%);
 }
 
-#add-book-button {
+#add-book-button, #sort-books-button {
   font-family: inherit;
   font-size: 1rem;
   position: absolute;
   top: 0;
   left: 100%;
   background-color: var(--post-it-yellow);
+  background-image: url(images/light-paper-fibers.png);
   border: none;
   margin-left: 2px;
   padding: 16px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+#sort-books-button {
+  transform: translateY(100%);
+  background-color: #a8e9fb;
 }
 
 #form-submit {
@@ -74,13 +91,7 @@ p {
 #library-set {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  margin: 40px;
-  background-color: var(--leather-border);
-  background-image: url(images/dark-wood.png);
-  border: 50px solid var(--leather-border);
-  padding: 20px;
-  border-image: url(images/purty-wood.png) 60 round;
-  min-width: min-content;
+  /* min-width: min-content; */
 }
 
 .book-info {
@@ -89,7 +100,7 @@ p {
   grid-template-rows: repeat(5, 1fr);
   text-align: center;
   background: var(--book-form-text);
-  background: linear-gradient(180deg, var(--book-form-text) 40%, rgba(236,231,210,1) 75%);
+  background: url(images/lined-paper-2.png), linear-gradient(180deg, var(--book-form-text) 40%, rgba(236,231,210,1) 75%);
   -webkit-box-shadow: 2px 1px 4px 1px rgba(35,26,3,0.25); 
   box-shadow: 2px 1px 4px 1px rgba(35,26,3,0.25);
   border-radius: 10px;
@@ -173,7 +184,7 @@ button {
 .attribution {
   position: absolute;
   bottom: 0;
-  left: 0;
+  text-align: center;
 }
 
 .attribution a {
@@ -186,6 +197,11 @@ button {
 }
 
 /* Media Queries */
+@media only screen and (max-width: 1600px) {
+  #library-set {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 
 @media only screen and (max-width: 1200px) {
   #library-set {
@@ -197,7 +213,7 @@ button {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 650px) {
   #library-set {
     grid-template-columns: 1fr;
   }

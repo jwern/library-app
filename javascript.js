@@ -108,6 +108,19 @@ function revealForm() {
   };
 }
 
+function sortBooks() {
+  myLibrary = myLibrary.sort(function(a, b) {
+    let aName = a.title.replace(/^The |^A |^An /i, "");
+    let bName = b.title.replace(/^The |^A |^An /i, "");
+    return aName.localeCompare(bName);
+  });
+  
+  let libraryContainer = document.getElementById('library-set');
+
+  libraryContainer.innerHTML = '';
+  initializeBookDisplay();
+}
+
 // Translate form input to Book Object input
 function formatBookInput(input) {
   // let defaultValue = "N/A";
@@ -139,6 +152,7 @@ function deleteBook(book) {
 function initializeForm() {
   let addBookButton = document.getElementById('add-book-button');
   let form = document.getElementById('add-book-form');
+  let sortBooksButton = document.getElementById('sort-books-button');
 
   addBookButton.addEventListener('click', revealForm); // Display the add book form when button is clicked
 
@@ -148,6 +162,8 @@ function initializeForm() {
     addNewBook(bookInput); // Add the submitted book to our library
     event.target.reset(); // Empty the form inputs after creating the new book
   });
+
+  sortBooksButton.addEventListener('click', sortBooks);
 }
 
 // Initial display of books already in library
