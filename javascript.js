@@ -5,20 +5,18 @@ function Book([title, author, pages, read]) {
   this.pages = pages;
   this.read = readStatus(read);
   this.bookID = bookID++;
-  this.toggleRead = function() {
-    this.read = readStatus(!this.read);
-  }
 }
 
-// Book.prototype.toggleRead = function() {
-//   this.read = readStatus(!this.read);
-// }
+Book.prototype.toggleRead = function() {
+  this.read = readStatus(!this.read);
+  updateLocalStorageLibrary()
+}
 
 function toggleReadStatus(book) {
   let bookDiv = findBookDiv(book);
   let bookObject = myLibrary.find(obj => obj.bookID == findBookID(bookDiv));
   
-  bookObject.toggleRead; // Update the Book object with new read status
+  bookObject.toggleRead(); // Update the Book object with new read status
   bookDiv.querySelector('.read').classList.toggle('have-read-icon'); // Update the DOM with new read status
   bookDiv.querySelector('.read').classList.toggle('have-not-read-icon'); // Update the DOM with new read status
 }
@@ -34,7 +32,7 @@ function findBookID(div) {
 // Add the book object to the persistent library array
 function addBookToLibrary(book) {
   myLibrary.push(book);
-  localStorage.setItem("myLibraryLocal", JSON.stringify(myLibrary));
+  updateLocalStorageLibrary()
   localStorage.setItem('bookIDLocal', bookID);
 }
 
@@ -123,6 +121,7 @@ function sortBooks() {
   let arrayChanged = preSortedLibrary.find(obj => obj !== myLibrary[preSortedLibrary.indexOf(obj)]);
 
   if (arrayChanged) {
+    updateLocalStorageLibrary()
     refreshBookDisplay();
   };
 }
@@ -138,6 +137,7 @@ function refreshBookDisplay() {
 
 // Translate form input to Book Object input
 function formatBookInput(input) {
+  console.log(input);
   // let defaultValue = "N/A";
   let title = input['book-title'];
   let author = input['book-author'];
@@ -161,6 +161,7 @@ function deleteBook(book) {
 
   bookToDelete.remove(); // Remove the book div from the DOM
   myLibrary = myLibrary.filter(book => book.bookID != bookIDToDelete);
+  updateLocalStorageLibrary()
 }
 
 // Add eventListeners to form buttons
@@ -186,6 +187,10 @@ function initializeBookDisplay() {
   for (book of myLibrary) {
     displayNewBook(book);
   };
+}
+
+function updateLocalStorageLibrary() {
+  localStorage.setItem("myLibraryLocal", JSON.stringify(myLibrary));
 }
 
 // Static book objects for testing purposes
@@ -230,15 +235,14 @@ function startupLibrary() {
     let newLibrary = localStorage.getItem('myLibraryLocal');
     if (newLibrary) {
       bookID = Number(localStorage.getItem('bookIDLocal'));
-      myLibrary = JSON.parse(newLibrary);
-      console.log("using localstorage", myLibrary);
+      myLibrary = JSON.parse(newLibrary).map(function(obj) {
+        return new Book([obj["title"], obj["author"], obj["pages"], obj["read"]]);
+      });
     } else {
-      console.log("no storage", myLibrary);
       addTestBooks();
     }
   }
   else {
-    console.log("no storage", myLibrary);
     addTestBooks();
   }
   initializeBookDisplay();
