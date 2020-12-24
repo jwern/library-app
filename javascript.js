@@ -5,20 +5,22 @@ function Book([title, author, pages, read]) {
   this.pages = pages;
   this.read = readStatus(read);
   this.bookID = bookID++;
+  this.toggleRead = function() {
+    this.read = readStatus(!this.read);
+  }
 }
 
-Book.prototype.toggleRead = function() {
-  this.read = readStatus(!this.read);
-}
+// Book.prototype.toggleRead = function() {
+//   this.read = readStatus(!this.read);
+// }
 
 function toggleReadStatus(book) {
   let bookDiv = findBookDiv(book);
   let bookObject = myLibrary.find(obj => obj.bookID == findBookID(bookDiv));
   
-  bookObject.toggleRead(); // Update the Book object with new read status
-  // bookDiv.querySelector('.read').innerHTML = bookObject.read; // Update the DOM with new read status
-  bookDiv.querySelector('.read').classList.toggle('have-read-icon');
-  bookDiv.querySelector('.read').classList.toggle('have-not-read-icon');
+  bookObject.toggleRead; // Update the Book object with new read status
+  bookDiv.querySelector('.read').classList.toggle('have-read-icon'); // Update the DOM with new read status
+  bookDiv.querySelector('.read').classList.toggle('have-not-read-icon'); // Update the DOM with new read status
 }
 
 function findBookDiv(button) {
@@ -32,6 +34,8 @@ function findBookID(div) {
 // Add the book object to the persistent library array
 function addBookToLibrary(book) {
   myLibrary.push(book);
+  localStorage.setItem("myLibraryLocal", JSON.stringify(myLibrary));
+  localStorage.setItem('bookIDLocal', bookID);
 }
 
 function readStatus(read) {
@@ -195,8 +199,48 @@ function addTestBooks() {
   addBookToLibrary(new Book(["The Year of the Death of Ricardo Reis", "José Saramago", 145]));
 }
 
+// Testing for LocalStorage, from MDN:
+function storageAvailable(type) {
+  var storage;
+  try {
+      storage = window[type];
+      var x = '__storage_test__';
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      return true;
+  }
+  catch(e) {
+      return e instanceof DOMException && (
+          // everything except Firefox
+          e.code === 22 ||
+          // Firefox
+          e.code === 1014 ||
+          // test name field too, because code might not be present
+          // everything except Firefox
+          e.name === 'QuotaExceededError' ||
+          // Firefox
+          e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+          // acknowledge QuotaExceededError only if there's something already stored
+          (storage && storage.length !== 0);
+  }
+}
+
 function startupLibrary() {
-  addTestBooks();
+  if (storageAvailable('localStorage')) {
+    let newLibrary = localStorage.getItem('myLibraryLocal');
+    if (newLibrary) {
+      bookID = Number(localStorage.getItem('bookIDLocal'));
+      myLibrary = JSON.parse(newLibrary);
+      console.log("using localstorage", myLibrary);
+    } else {
+      console.log("no storage", myLibrary);
+      addTestBooks();
+    }
+  }
+  else {
+    console.log("no storage", myLibrary);
+    addTestBooks();
+  }
   initializeBookDisplay();
   initializeForm();
 }
