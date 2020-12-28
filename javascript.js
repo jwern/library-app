@@ -117,7 +117,7 @@ function sortBooks() {
     let bName = b.title.replace(/^The |^A |^An /i, "");
     return aName.localeCompare(bName);
   });
- 
+  
   let arrayChanged = preSortedLibrary.find(obj => obj !== myLibrary[preSortedLibrary.indexOf(obj)]);
 
   if (arrayChanged) {
@@ -137,7 +137,6 @@ function refreshBookDisplay() {
 
 // Translate form input to Book Object input
 function formatBookInput(input) {
-  console.log(input);
   // let defaultValue = "N/A";
   let title = input['book-title'];
   let author = input['book-author'];
@@ -163,6 +162,13 @@ function deleteBook(book) {
   myLibrary = myLibrary.filter(book => book.bookID != bookIDToDelete);
   updateLocalStorageLibrary()
 }
+
+// Kyle's suggestion for combining functions that edit myLibrary so you can update localStorage in one place
+// newLibrary would be a mutation function like concat instead of push; filter, etc.
+// function setLibrary(newLibrary) {
+//   myLibrary = newLibrary
+//   updateLocalStorageLibrary()
+// }
 
 // Add eventListeners to form buttons
 function initializeForm() {
@@ -236,8 +242,10 @@ function startupLibrary() {
     if (newLibrary) {
       bookID = Number(localStorage.getItem('bookIDLocal'));
       myLibrary = JSON.parse(newLibrary).map(function(obj) {
-        return new Book([obj["title"], obj["author"], obj["pages"], obj["read"]]);
+        // return new Book([obj["title"], obj["author"], obj["pages"], obj["read"]]);
+        return Object.assign({}, obj, Book.prototype);
       });
+
     } else {
       addTestBooks();
     }
@@ -252,3 +260,6 @@ function startupLibrary() {
 let myLibrary = [];
 let bookID = 1;
 startupLibrary();
+// To do: have Book constructor take an Object instead of an array
+// form returns and object, JSON returns an array of objects
+// both should feed into constructor successfully

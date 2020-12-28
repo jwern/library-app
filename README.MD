@@ -16,7 +16,9 @@ The most difficult area for me was working with the form input in JavaScript: th
 
 Another challenging area was connecting the "delete" button to both the related Book object in the myLibrary array, as well as the correct DOM element.  TOP's suggestion was to use the object's index within the array as a `data-attribute` value, but this seemed like it would cause issues very quickly: as soon as an object was deleted from the array, the indexes of the remaining objects would change and would no longer match their `data-attribute` value.  And if you added books after deleting, the new books would potentially take on the index, and thus `data-attribute`, of already-existing objects.  You could re-loop through the remaining objects and reassign their `data-attribute` each time, but this seemed like an unnecessary extra step.  
 
-The solution I opted for was creating a global bookID variable that simply began at 1 and was assigned as `data-id` for each book; then, after a book is assigned an ID, bookID increments by one.  This means that the first book you add has data-id: 1, and the 30th book will have data-id: 30, no matter how many other books you add or delete.    
+The solution I opted for was creating a global bookID variable that simply began at 1 and was assigned as `data-id` for each book; then, after a book is assigned an ID, bookID increments by one.  This means that the first book you add has data-id: 1, and the 30th book will have data-id: 30, no matter how many other books you add or delete.   
+
+I also found connecting LocalStorage to the project to be more difficult than implied by The Odin Project's directives page, where it was simply "if you feel like adding this, it should be no problem."  However, since we're using an array of objects to store the books - and LocalStorage can only set and get strings - we had to use JSON to translate our array back and forth.  This was fairly straightforward, using `JSON.stringify` and `JSON.parse` for conversion, but it was an entirely new area for me on top of LocalStorage itself.  
 
 The final challenge of this project was self-imposed: I chose to work with vanilla HTML/CSS instead of Bootstrap with SCSS, which I've been using this year for professional projects.  I had used Bootstrap so much that I worried I'd forgotten how to build a web page without it, so this was a good refresher.
 
@@ -31,4 +33,4 @@ TBA
 
 ## Technologies ##
 
-This Library App was built with HTML, CSS, and JavaScript.  The layout is CSS Grid.  The font is... TBA
+This Library App was built with HTML, CSS, and JavaScript.  The layout is CSS Grid.  The font is [Cutive Mono](https://fonts.google.com/specimen/Cutive+Mono) imported via Google Fonts.  The "read" / "not read" icons are from the [Quality Control Icon Pack](https://www.flaticon.com/packs/quality-control-8) by Freepik on flaticon.com.  Background textures on the body, border, and add book form are from [transparenttextures.com](https://www.transparenttextures.com/).  The gradient on the cards was created with [CSS Gradient](https://cssgradient.io/).
