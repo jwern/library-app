@@ -32,6 +32,8 @@ TBA
 
 Ideally a user would be able to edit a book's individual details directly by clicking on the item they want to change.  Currently only the read status is editable, so to update a book's info one would have to remove the book and re-add it with the desired edits.  Adding an `eventListener` to each info section and an input field that appears on click shouldn't be too much trouble, and allowing changes to all the data fields would primarily require more `prototype` methods.  For this first version, I opted to spend time on connecting `localStorage` instead.
 
+I would also add support for Internet Explorer in the future: this version has not been written to be compatible with IE and will not display properly in that browser, specifically the JavaScript and CSS Grid.
+
 ## Technologies ##
 
 This Library App was built with HTML, CSS, and JavaScript.  The layout is CSS Grid.  Book data is saved to local storage. The font is [Cutive Mono](https://fonts.google.com/specimen/Cutive+Mono) imported via Google Fonts.  The "read" / "not read" icons are from the [Quality Control Icon Pack](https://www.flaticon.com/packs/quality-control-8) by Freepik on flaticon.com.  Background textures on the body, border, and add book form are from [transparenttextures.com](https://www.transparenttextures.com/).  The gradient on the cards was created with [CSS Gradient](https://cssgradient.io/).
