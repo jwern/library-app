@@ -1,9 +1,9 @@
 // Book Constructor
-function Book([title, author, pages, read]) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = readStatus(read);
+function Book(obj) {
+  this.title = obj.title;
+  this.author = obj.author;
+  this.pages = obj.pages;
+  this.read = readStatus(obj.read);
   this.bookID = bookID++;
 }
 
@@ -80,13 +80,6 @@ function displayNewBook(book) {
     deleteBook(e.target);
   });
 
-  // Create a toggle read button for the book
-  // let toggleButton = createButton("toggle", "Change Read Status");
-  // bookDiv.append(toggleButton);
-  // toggleButton.addEventListener('click', function(e) {
-  //   toggleReadStatus(e.target);
-  // });
-
   // Add the container to the library
   libraryBlock.append(bookDiv);
 }
@@ -136,20 +129,20 @@ function refreshBookDisplay() {
 }
 
 // Translate form input to Book Object input
-function formatBookInput(input) {
-  // let defaultValue = "N/A";
-  let title = input['book-title'];
-  let author = input['book-author'];
-  let pages = input['book-pages'];
-  let read = input['book-have-read'];
+// function formatBookInput(input) {
+//   // let defaultValue = "N/A";
+//   let title = input['book-title'];
+//   let author = input['book-author'];
+//   let pages = input['book-pages'];
+//   let read = input['book-have-read'];
 
-  return [title, author, pages, read];
-}
+//   return [title, author, pages, read];
+// }
 
 // Create a new book from form input, and add to library array and DOM
 function addNewBook(input) {
-  let bookDetails = formatBookInput(input);
-  let bookToAdd = new Book(bookDetails);
+  // let bookDetails = formatBookInput(input);
+  let bookToAdd = new Book(input);
   addBookToLibrary(bookToAdd);
   displayNewBook(bookToAdd);
 }
@@ -163,6 +156,9 @@ function deleteBook(book) {
   updateLocalStorageLibrary()
 }
 
+// function createNewLibrary(newLibrary) {
+
+// }
 // Kyle's suggestion for combining functions that edit myLibrary so you can update localStorage in one place
 // newLibrary would be a mutation function like concat instead of push; filter, etc.
 // function setLibrary(newLibrary) {
@@ -201,13 +197,13 @@ function updateLocalStorageLibrary() {
 
 // Static book objects for testing purposes
 function addTestBooks() {
-  addBookToLibrary(new Book(["Catch-22", "Joseph Heller", 208, "Have read"]));
-  addBookToLibrary(new Book(["The Old Man and the Sea", "Ernest Hemingway", 75]));
-  addBookToLibrary(new Book(["In Cold Blood", "Truman Capote", 250, "Have read"]));
-  addBookToLibrary(new Book(["Middlesex", "Jeffrey Eugenides", 450, "Have read"]));
-  addBookToLibrary(new Book(["The Handmaid's Tale", "Margaret Atwood", 180, "Have read"]));
-  addBookToLibrary(new Book(["Alice in Wonderland", "Lewis Carroll", 220, "Have read"]));
-  addBookToLibrary(new Book(["The Year of the Death of Ricardo Reis", "José Saramago", 145]));
+  addBookToLibrary(new Book({title: "Catch-22", author: "Joseph Heller", pages: 208, read: "Have read"}));
+  addBookToLibrary(new Book({title: "The Old Man and the Sea", author: "Ernest Hemingway", pages: 75}));
+  // addBookToLibrary(new Book(["In Cold Blood", "Truman Capote", 250, "Have read"]));
+  // addBookToLibrary(new Book(["Middlesex", "Jeffrey Eugenides", 450, "Have read"]));
+  // addBookToLibrary(new Book(["The Handmaid's Tale", "Margaret Atwood", 180, "Have read"]));
+  // addBookToLibrary(new Book(["Alice in Wonderland", "Lewis Carroll", 220, "Have read"]));
+  // addBookToLibrary(new Book(["The Year of the Death of Ricardo Reis", "José Saramago", 145]));
 }
 
 // Testing for LocalStorage, from MDN:
