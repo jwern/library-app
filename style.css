@@ -203,7 +203,7 @@ button {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 768px) {
   body {
     border-width: 40px;
   }
