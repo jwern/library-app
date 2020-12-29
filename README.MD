@@ -26,10 +26,11 @@ The final challenge of this project was self-imposed: I chose to work with vanil
 
 TBA
 ![Desktop view screenshot](/images/library_screenshot.png)
+![Mobile view screenshot](/images/library_screenshot_mobile.png)
 
 ## To Do ##
 
-TBA
+Ideally a user would be able to edit a book's individual details directly by clicking on the item they want to change.  Currently only the read status is editable, so to update a book's info one would have to remove the book and re-add it with the desired edits.  Adding an `eventListener` to each info section and an input field that appears on click shouldn't be too much trouble, and allowing changes to all the data fields would primarily require more `prototype` methods.  For this first version, I opted to spend time on connecting `localStorage` instead.
 
 ## Technologies ##
 

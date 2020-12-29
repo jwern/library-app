@@ -12,6 +12,7 @@ Book.prototype.toggleRead = function() {
   updateLocalStorageLibrary()
 }
 
+// Change the book's read status upon clicking icon
 function toggleReadStatus(book) {
   let bookDiv = findBookDiv(book);
   let bookObject = myLibrary.find(obj => obj.bookID == findBookID(bookDiv));
@@ -21,10 +22,12 @@ function toggleReadStatus(book) {
   bookDiv.querySelector('.read').classList.toggle('have-not-read-icon'); // Update the DOM with new read status
 }
 
+// Get the parent container for book
 function findBookDiv(button) {
   return button.closest('.book-info');
 }
 
+// Get the specific book by ID
 function findBookID(div) {
   return div.getAttribute('data-id');
 }
@@ -36,10 +39,12 @@ function addBookToLibrary(book) {
   localStorage.setItem('bookIDLocal', bookID);
 }
 
+// Return read status based on input
 function readStatus(read) {
   return (read ? "Have read" : "");
 }
 
+// Return read status based on icon
 function setReadStatusClass(read) {
   return (read ? "have-read-icon" : "have-not-read-icon");
 }
@@ -80,10 +85,11 @@ function displayNewBook(book) {
     deleteBook(e.target);
   });
 
-  // Add the container to the library
+  // Add the book container to the library
   libraryBlock.append(bookDiv);
 }
 
+// Create a button in the DOM
 function createButton(type, text) {
   let button = document.createElement('button');
   button.classList.add(`${type}-button`);
@@ -103,6 +109,7 @@ function revealForm() {
   };
 }
 
+// Sort books alphabetically by title when sort button pressed
 function sortBooks() {
   let preSortedLibrary = myLibrary.slice();
   myLibrary.sort(function(a, b) {
@@ -113,12 +120,14 @@ function sortBooks() {
   
   let arrayChanged = preSortedLibrary.find(obj => obj !== myLibrary[preSortedLibrary.indexOf(obj)]);
 
+  // Refresh book list if the order changed
   if (arrayChanged) {
     updateLocalStorageLibrary()
     refreshBookDisplay();
   };
 }
 
+// Clear all book divs from DOM and then display current library
 function refreshBookDisplay() {
   let libraryContainer = document.getElementById('library-set');
 
@@ -128,17 +137,6 @@ function refreshBookDisplay() {
   initializeBookDisplay();
 }
 
-// Translate form input to Book Object input
-// function formatBookInput(input) {
-//   // let defaultValue = "N/A";
-//   let title = input['book-title'];
-//   let author = input['book-author'];
-//   let pages = input['book-pages'];
-//   let read = input['book-have-read'];
-
-//   return [title, author, pages, read];
-// }
-
 // Create a new book from form input, and add to library array and DOM
 function addNewBook(input) {
   // let bookDetails = formatBookInput(input);
@@ -147,30 +145,21 @@ function addNewBook(input) {
   displayNewBook(bookToAdd);
 }
 
+// Remove a book when "remove book" button pressed
 function deleteBook(book) {
   let bookToDelete = findBookDiv(book);
   let bookIDToDelete = findBookID(bookToDelete);
 
   bookToDelete.remove(); // Remove the book div from the DOM
-  myLibrary = myLibrary.filter(book => book.bookID != bookIDToDelete);
+  myLibrary = myLibrary.filter(book => book.bookID != bookIDToDelete); // Remove the book from library array
   updateLocalStorageLibrary()
 }
 
-// function createNewLibrary(newLibrary) {
-
-// }
-// Kyle's suggestion for combining functions that edit myLibrary so you can update localStorage in one place
-// newLibrary would be a mutation function like concat instead of push; filter, etc.
-// function setLibrary(newLibrary) {
-//   myLibrary = newLibrary
-//   updateLocalStorageLibrary()
-// }
-
 // Add eventListeners to form buttons
 function initializeForm() {
-  let addBookButton = document.getElementById('add-book-button');
+  let addBookButton = document.getElementById('add-book-button'); // Button that displays add book form
   let form = document.getElementById('add-book-form');
-  let sortBooksButton = document.getElementById('sort-books-button');
+  let sortBooksButton = document.getElementById('sort-books-button'); // Button that sorts books
 
   addBookButton.addEventListener('click', revealForm); // Display the add book form when button is clicked
 
@@ -191,22 +180,18 @@ function initializeBookDisplay() {
   };
 }
 
+// Called throughout our script, anytime the library array changes
 function updateLocalStorageLibrary() {
   localStorage.setItem("myLibraryLocal", JSON.stringify(myLibrary));
 }
 
-// Static book objects for testing purposes
+// Static book objects for sample purposes
 function addTestBooks() {
-  addBookToLibrary(new Book({title: "Catch-22", author: "Joseph Heller", pages: 208, read: "Have read"}));
-  addBookToLibrary(new Book({title: "The Old Man and the Sea", author: "Ernest Hemingway", pages: 75}));
-  // addBookToLibrary(new Book(["In Cold Blood", "Truman Capote", 250, "Have read"]));
-  // addBookToLibrary(new Book(["Middlesex", "Jeffrey Eugenides", 450, "Have read"]));
-  // addBookToLibrary(new Book(["The Handmaid's Tale", "Margaret Atwood", 180, "Have read"]));
-  // addBookToLibrary(new Book(["Alice in Wonderland", "Lewis Carroll", 220, "Have read"]));
-  // addBookToLibrary(new Book(["The Year of the Death of Ricardo Reis", "José Saramago", 145]));
+  addBookToLibrary(new Book({title: "Sample Book", author: "Writey McWriterson", pages: 250, read: "Have read"}));
+  addBookToLibrary(new Book({title: "Another Sample Book", author: "A. U. Thor", pages: 510}));
 }
 
-// Testing for LocalStorage, from MDN:
+// Testing for LocalStorage, function taken from MDN:
 function storageAvailable(type) {
   var storage;
   try {
@@ -232,13 +217,13 @@ function storageAvailable(type) {
   }
 }
 
+// Initial setup: get localStorage, add sample books if needed, display library, and add eventListeners to buttons
 function startupLibrary() {
   if (storageAvailable('localStorage')) {
     let newLibrary = localStorage.getItem('myLibraryLocal');
     if (newLibrary) {
       bookID = Number(localStorage.getItem('bookIDLocal'));
       myLibrary = JSON.parse(newLibrary).map(function(obj) {
-        // return new Book([obj["title"], obj["author"], obj["pages"], obj["read"]]);
         return Object.assign({}, obj, Book.prototype);
       });
 
@@ -256,6 +241,3 @@ function startupLibrary() {
 let myLibrary = [];
 let bookID = 1;
 startupLibrary();
-// To do: have Book constructor take an Object instead of an array
-// form returns and object, JSON returns an array of objects
-// both should feed into constructor successfully
