@@ -111,10 +111,6 @@ p {
   font-size: 1rem;
 }
 
-/* .book-info p {
-  padding: 2px 0;
-} */
-
 .book-info span {
   border-right: 4px double black;
 }
@@ -139,12 +135,6 @@ p {
 button {
   cursor: pointer;
 }
-/* 
-.book-info p.have-not-read-icon, .book-info p.have-read-icon {
-  /* padding-bottom: 90px; */
-  /* margin-top: -20px;
-  cursor: pointer;
-} */
 
 .read {
   margin-top: -20px;
@@ -219,5 +209,8 @@ button {
   }
   #library-set {
     grid-template-columns: 1fr;
+  }
+  #add-book-section.hidden {
+    transform: translateX(-100%);
   }
 }
