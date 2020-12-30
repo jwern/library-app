@@ -3,7 +3,7 @@ function Book(obj) {
   this.title = obj.title;
   this.author = obj.author;
   this.pages = obj.pages;
-  this.read = readStatus(obj.read);
+  this.read = obj.read;
   this.bookID = bookID++;
 }
 
