@@ -90,12 +90,15 @@ p {
 
 #library-set {
   display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: repeat(6, 1fr);
   /* min-width: min-content; */
 }
 
 .book-info {
   display: grid;
+  -ms-grid-columns: 1fr 3fr;
+  -ms-grid-rows: 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 3fr;
   grid-template-rows: repeat(5, 1fr);
   text-align: center;
@@ -162,6 +165,10 @@ button {
 }
 
 .delete-button {
+  -ms-grid-row: 5;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  -ms-grid-row-span: 1;
   grid-column: 1/3;
   grid-row: 5;
   background-color: transparent;
@@ -189,17 +196,20 @@ button {
 /* Media Queries */
 @media only screen and (max-width: 1600px) {
   #library-set {
+    -ms-grid-columns: 1fr 1fr 1fr 1fr;
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media only screen and (max-width: 1200px) {
   #library-set {
+    -ms-grid-columns: 1fr 1fr 1fr;
     grid-template-columns: repeat(3, 1fr);
   }
 }
 @media only screen and (max-width: 1024px) {
   #library-set {
+    -ms-grid-columns: 1fr 1fr 1fr;
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -208,6 +218,7 @@ button {
     border-width: 40px;
   }
   #library-set {
+    -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
   }
   #add-book-section.hidden {
