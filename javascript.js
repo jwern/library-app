@@ -3,7 +3,7 @@ function Book(obj) {
   this.title = obj.title;
   this.author = obj.author;
   this.pages = obj.pages;
-  this.read = obj.read;
+  this.read = readStatus(obj.read);
   this.bookID = bookID++;
 }
 
@@ -234,6 +234,7 @@ function startupLibrary() {
   else {
     addTestBooks();
   }
+ 
   initializeBookDisplay();
   initializeForm();
 }
