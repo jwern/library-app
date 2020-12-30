@@ -165,7 +165,7 @@ function initializeForm() {
 
   form.addEventListener('submit', event => { // Listener to add book that is submitted via form
     event.preventDefault(); // We don't want the form to actually submit its data
-    const bookInput = Object.fromEntries(new FormData(event.target).entries()); // FormData translation via https://stackoverflow.com/a/56857084/12183520
+    let bookInput = Object.fromEntries(new FormData(event.target).entries()); // FormData translation via https://stackoverflow.com/a/56857084/12183520
     addNewBook(bookInput); // Add the submitted book to our library
     event.target.reset(); // Empty the form inputs after creating the new book
   });
