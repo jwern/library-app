@@ -1,16 +1,31 @@
 // Book Constructor
-function Book(obj) {
-  this.title = obj.title;
-  this.author = obj.author;
-  this.pages = obj.pages;
-  this.read = readStatus(obj.read);
-  this.bookID = bookID++;
+class Book {
+  constructor(obj) {
+    this.title = obj.title;
+    this.author = obj.author;
+    this.pages = obj.pages;
+    this.read = readStatus(obj.read);
+    this.bookID = bookID++;
+  }
+
+  toggleRead() {
+    this.read = readStatus(!this.read);
+    updateLocalStorageLibrary()
+  }
 }
 
-Book.prototype.toggleRead = function() {
-  this.read = readStatus(!this.read);
-  updateLocalStorageLibrary()
-}
+// function Book(obj) {
+//   this.title = obj.title;
+//   this.author = obj.author;
+//   this.pages = obj.pages;
+//   this.read = readStatus(obj.read);
+//   this.bookID = bookID++;
+// }
+
+// Book.prototype.toggleRead = function() {
+//   this.read = readStatus(!this.read);
+//   updateLocalStorageLibrary()
+// }
 
 // Change the book's read status upon clicking icon
 function toggleReadStatus(book) {
@@ -66,6 +81,8 @@ function displayNewBook(book) {
       heading.append(`${info}:`)
       heading.classList.add(`heading-${info}`);
       if (info === 'read') {
+        // Function expression version of setReadStatusClass
+        // let setReadStatusClass = readStatus => (readStatus ? "have-read-icon" : "have-not-read-icon");
         infoPara.classList.add(setReadStatusClass(book[info]));
         infoPara.addEventListener('click', function(e) {
           toggleReadStatus(e.target);
