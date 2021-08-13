@@ -119,10 +119,12 @@ function revealForm() {
   let addBookform = document.getElementById("add-book-section");
   addBookform.classList.toggle("hidden");
 
+  let addBookButton = document.getElementById("add-book-button");
+
   if (addBookform.classList.contains("hidden")) {
-    this.innerHTML = "Add Book";
+    addBookButton.innerHTML = "Add Book";
   } else {
-    this.innerHTML = "Hide Form";
+    addBookButton.innerHTML = "Hide Form";
   }
 }
 
@@ -158,10 +160,16 @@ function refreshBookDisplay() {
 
 // Create a new book from form input, and add to library array and DOM
 function addNewBook(input) {
-  // let bookDetails = formatBookInput(input);
   let bookToAdd = new Book(input);
   addBookToLibrary(bookToAdd);
   displayNewBook(bookToAdd);
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    revealForm();
+    let scrollToId = document.querySelector(
+      `.book-info[data-id="${bookToAdd.bookID}"]`
+    );
+    scrollToId.scrollIntoView();
+  }
 }
 
 // Remove a book when "remove book" button pressed
