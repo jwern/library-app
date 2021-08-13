@@ -158,17 +158,20 @@ function refreshBookDisplay() {
   initializeBookDisplay();
 }
 
+function adjustFormOnMobile(bookId) {
+  revealForm();
+
+  let scrollToId = document.querySelector(`.book-info[data-id="${bookId}"]`);
+  scrollToId.scrollIntoView();
+}
+
 // Create a new book from form input, and add to library array and DOM
 function addNewBook(input) {
   let bookToAdd = new Book(input);
   addBookToLibrary(bookToAdd);
   displayNewBook(bookToAdd);
   if (window.matchMedia("(max-width: 768px)").matches) {
-    revealForm();
-    let scrollToId = document.querySelector(
-      `.book-info[data-id="${bookToAdd.bookID}"]`
-    );
-    scrollToId.scrollIntoView();
+    adjustFormOnMobile(bookToAdd.bookID);
   }
 }
 
